@@ -1,14 +1,32 @@
-import { Text, View, StyleSheet } from "react-native";
+import { useState } from "react";
+import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 
 function MainTime() {
+  const [mainColor, setMainColor] = useState("black");
   return (
-    <View style={styles.mainTime}>
-      <Text style={styles.mainText}>00</Text>
-      <Text style={styles.mainText}>:</Text>
-      <Text style={styles.mainText}>00</Text>
-      <Text style={styles.mainText}>:</Text>
-      <Text style={styles.mainText}>00</Text>
-    </View>
+    <TouchableWithoutFeedback
+      onLongPress={(i) => setMainColor((i = "green"))}
+      onPressIn={(i) => setMainColor((i = "red"))}
+      onPressOut={(i) => setMainColor((i = "black"))}
+    >
+      <View style={styles.mainTime}>
+        <Text style={{ color: mainColor, fontFamily: "Bebas", fontSize: 96 }}>
+          00
+        </Text>
+        <Text style={{ color: mainColor, fontFamily: "Bebas", fontSize: 96 }}>
+          :
+        </Text>
+        <Text style={{ color: mainColor, fontFamily: "Bebas", fontSize: 96 }}>
+          00
+        </Text>
+        <Text style={{ color: mainColor, fontFamily: "Bebas", fontSize: 96 }}>
+          :
+        </Text>
+        <Text style={{ color: mainColor, fontFamily: "Bebas", fontSize: 96 }}>
+          00
+        </Text>
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -19,9 +37,5 @@ const styles = StyleSheet.create({
     fontSize: 96,
     flexDirection: "row",
     justifyContent: "space-between",
-  },
-  mainText: {
-    fontSize: 96,
-    fontFamily: "Bebas",
   },
 });
