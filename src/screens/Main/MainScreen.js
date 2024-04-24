@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
   },
   left_side: {
-    width: 182,
+    width: "48%",
     height: 247,
     paddingTop: 20,
     paddingLeft: 14,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
   },
   right_side: {
-    width: 182,
+    width: "48%",
     height: 247,
     backgroundColor: "#B5DCF9",
     borderRadius: 12,
