@@ -15,9 +15,11 @@ import { useState } from "react";
 import MainTime from "../../components/MainTime";
 import DialogButton from "react-native-dialog/lib/Button";
 import LastResult from "../../components/LastResult";
+import * as SecureStore from "expo-secure-store";
+import { useAllTime } from "../../zustand/zustand";
 function MainScreen() {
-  const [time, useTime] = useState(0);
   const [DialogVisible, setDialogVisible] = useState(false);
+  const { clearAllTime } = useAllTime();
   const [fontsLoaded] = useFonts({
     Bebas: require("../../assets/fonts/Bebas_Neue_Cyrillic.ttf"),
     Ukraine: require("../../assets/fonts/e-Ukraine.otf"),
@@ -25,6 +27,11 @@ function MainScreen() {
   if (!fontsLoaded) {
     return null;
   }
+
+  const timeCleaner = () => {
+    setDialogVisible(false);
+    clearAllTime();
+  };
 
   return (
     <SafeAreaView
@@ -52,7 +59,7 @@ function MainScreen() {
           <View style={styles.right_side}>
             <Text style={styles.right_side_text}>Час останніх складань</Text>
             <View>
-              <LastResult />
+              <LastResult DialogVisible={DialogVisible} />
             </View>
           </View>
         </View>
@@ -80,7 +87,7 @@ function MainScreen() {
             </Dialog.Title>
             <DialogButton
               label="Так"
-              onPress={() => setDialogVisible(false)}
+              onPress={() => timeCleaner()}
               style={{
                 backgroundColor: "#242424",
                 borderRadius: 8,

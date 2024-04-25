@@ -1,21 +1,13 @@
 import { useEffect, useState } from "react";
 import * as SecureStore from "expo-secure-store";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { useAllTime } from "../zustand/zustand";
 
-function LastResult() {
-  const [lastTimes, setLastTimes] = useState([]);
+function LastResult({ DialogVisible }) {
+  const { allTimes } = useAllTime();
   const colors = ["rgb(0, 147, 0)", "rgb(0, 107, 0)", "rgb(18, 78, 0)"];
-  useEffect(() => {
-    const fetchData = async () => {
-      const times = await SecureStore.getItemAsync("times");
-      if (times) {
-        setLastTimes(JSON.parse(times));
-      }
-    };
-    fetchData();
-  }, [lastTimes]);
 
-  const mappedLastTimes = lastTimes.map((item, index) => (
+  const mappedLastTimes = allTimes.map((item, index) => (
     <View
       key={index}
       style={{
@@ -28,8 +20,8 @@ function LastResult() {
           fontFamily: "Ukraine",
           fontSize: 19,
           color:
-            index >= lastTimes.length - 3
-              ? colors[index - lastTimes.length + 3]
+            index >= allTimes.length - 3
+              ? colors[index - allTimes.length + 3]
               : "black",
         }}
       >
@@ -40,8 +32,8 @@ function LastResult() {
           fontFamily: "Ukraine",
           fontSize: 19,
           color:
-            index >= lastTimes.length - 3
-              ? colors[index - lastTimes.length + 3]
+            index >= allTimes.length - 3
+              ? colors[index - allTimes.length + 3]
               : "black",
         }}
       >
@@ -52,8 +44,8 @@ function LastResult() {
           fontFamily: "Ukraine",
           fontSize: 19,
           color:
-            index >= lastTimes.length - 3
-              ? colors[index - lastTimes.length + 3]
+            index >= allTimes.length - 3
+              ? colors[index - allTimes.length + 3]
               : "black",
         }}
       >
@@ -64,8 +56,8 @@ function LastResult() {
           fontFamily: "Ukraine",
           fontSize: 19,
           color:
-            index >= lastTimes.length - 3
-              ? colors[index - lastTimes.length + 3]
+            index >= allTimes.length - 3
+              ? colors[index - allTimes.length + 3]
               : "black",
         }}
       >
@@ -76,8 +68,8 @@ function LastResult() {
           fontFamily: "Ukraine",
           fontSize: 19,
           color:
-            index >= lastTimes.length - 3
-              ? colors[index - lastTimes.length + 3]
+            index >= allTimes.length - 3
+              ? colors[index - allTimes.length + 3]
               : "black",
         }}
       >

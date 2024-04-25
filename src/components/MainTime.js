@@ -1,14 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import * as SecureStore from "expo-secure-store";
+import { useAllTime } from "../zustand/zustand";
 
 function MainTime() {
   const [mainColor, setMainColor] = useState("black");
   const [time, setTime] = useState(0);
-  const [allTimes, setAllTimes] = useState([]);
   const [ready, setReady] = useState(false);
   const [isTiming, setTiming] = useState(false);
   const timeIntervalRef = useRef(null);
+  const { allTimes, addTimes } = useAllTime();
 
   const startTime = () => {
     setTiming(true);
@@ -19,7 +20,7 @@ function MainTime() {
   };
   const stopTime = () => {
     clearInterval(timeIntervalRef.current);
-    setAllTimes((item) => [...item, time]);
+    addTimes(time);
     setTiming(false);
   };
 
