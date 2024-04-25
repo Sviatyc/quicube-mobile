@@ -1,9 +1,11 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Text, View, StyleSheet, TouchableWithoutFeedback } from "react-native";
+import * as SecureStore from "expo-secure-store";
 
 function MainTime() {
   const [mainColor, setMainColor] = useState("black");
   const [time, setTime] = useState(0);
+  const [allTimes, setAllTimes] = useState([]);
   const [ready, setReady] = useState(false);
   const [isTiming, setTiming] = useState(false);
   const timeIntervalRef = useRef(null);
@@ -17,8 +19,20 @@ function MainTime() {
   };
   const stopTime = () => {
     clearInterval(timeIntervalRef.current);
+    setAllTimes((item) => [...item, time]);
     setTiming(false);
   };
+
+  useEffect(() => {
+    SecureStore.setItemAsync("times", JSON.stringify(allTimes));
+  }, [allTimes]);
+
+  useEffect(() => {
+    return () => {
+      clearInterval(timeIntervalRef.current);
+    };
+  }, []);
+
   return (
     <TouchableWithoutFeedback
       onLongPress={
@@ -35,7 +49,7 @@ function MainTime() {
       }}
       onPressOut={(i) => {
         setMainColor((i = "black"));
-        ready ? startTime() : stopTime();
+        ready ? startTime() : isTiming ? stopTime() : null;
         setReady(false);
       }}
     >

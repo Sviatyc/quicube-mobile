@@ -14,6 +14,7 @@ import { useFonts } from "expo-font";
 import { useState } from "react";
 import MainTime from "../../components/MainTime";
 import DialogButton from "react-native-dialog/lib/Button";
+import LastResult from "../../components/LastResult";
 function MainScreen() {
   const [time, useTime] = useState(0);
   const [DialogVisible, setDialogVisible] = useState(false);
@@ -50,6 +51,9 @@ function MainScreen() {
           </View>
           <View style={styles.right_side}>
             <Text style={styles.right_side_text}>Час останніх складань</Text>
+            <View>
+              <LastResult />
+            </View>
           </View>
         </View>
         <TouchableOpacity
