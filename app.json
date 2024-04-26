@@ -21,10 +21,17 @@
       "adaptiveIcon": {
         "foregroundImage": "./src/assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.sviatyc.quicubemobile"
     },
     "web": {
       "favicon": "./src/assets/images/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "7afb4bda-d4a2-496e-b4bd-3027aa743343"
+      }
+    },
+    "owner": "sviatyc"
   }
 }
