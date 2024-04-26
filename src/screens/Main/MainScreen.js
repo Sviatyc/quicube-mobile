@@ -15,8 +15,8 @@ import { useState } from "react";
 import MainTime from "../../components/MainTime";
 import DialogButton from "react-native-dialog/lib/Button";
 import LastResult from "../../components/LastResult";
-import * as SecureStore from "expo-secure-store";
 import { useAllTime } from "../../zustand/zustand";
+import AverageTime from "../../components/AverageTime";
 function MainScreen() {
   const [DialogVisible, setDialogVisible] = useState(false);
   const { clearAllTime } = useAllTime();
@@ -51,8 +51,11 @@ function MainScreen() {
         </Text>
         <View style={styles.info_container}>
           <View style={styles.left_side}>
-            <Text style={styles.left_side_text}>Середній час складання</Text>
-            <Text style={styles.left_side_text}>
+            <Text style={styles.left_side_text_one}>
+              Середній час складання
+            </Text>
+            <AverageTime />
+            <Text style={styles.left_side_text_two}>
               Середній час складання (10р.)
             </Text>
           </View>
@@ -163,10 +166,16 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Ukraine",
   },
-  left_side_text: {
+  left_side_text_one: {
     fontSize: 15,
     fontFamily: "Ukraine",
     color: "white",
+  },
+  left_side_text_two: {
+    fontSize: 15,
+    fontFamily: "Ukraine",
+    color: "white",
+    marginTop: 25,
   },
   right_side_text: {
     fontSize: 15,
