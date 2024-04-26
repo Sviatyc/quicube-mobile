@@ -20,7 +20,7 @@ import AverageTime from "../../components/AverageTime";
 import AverageTen from "../../components/AverageTen";
 function MainScreen() {
   const [DialogVisible, setDialogVisible] = useState(false);
-  const { clearAllTime } = useAllTime();
+  const { clearAllTime, allTimes } = useAllTime();
   const [fontsLoaded] = useFonts({
     Bebas: require("../../assets/fonts/Bebas_Neue_Cyrillic.ttf"),
     Ukraine: require("../../assets/fonts/e-Ukraine.otf"),
@@ -32,6 +32,10 @@ function MainScreen() {
   const timeCleaner = () => {
     setDialogVisible(false);
     clearAllTime();
+  };
+
+  const dialog_open = () => {
+    allTimes.length <= 0 ? setDialogVisible(false) : setDialogVisible(true);
   };
 
   return (
@@ -70,7 +74,7 @@ function MainScreen() {
         </View>
         <TouchableOpacity
           style={styles.reset_button}
-          onPress={() => setDialogVisible(true)}
+          onPress={() => dialog_open()}
           activeOpacity={0.8}
         >
           <Text style={styles.reset_button_text}>Скинути результат</Text>
@@ -128,6 +132,8 @@ const styles = StyleSheet.create({
   },
   logotype: {
     marginTop: 28,
+    width: 70,
+    height: 25,
   },
   mainTime: {
     marginTop: 90,
@@ -188,13 +194,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#B5DCF9",
     borderRadius: 20,
     margin: 0,
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 0.8,
   },
   dialog_title: {
     fontFamily: "Ukraine",
     fontSize: 18,
     padding: 10,
     borderRadius: 12,
-    backgroundColor: "#B5DCF9",
+    color: "black",
   },
 });
 
