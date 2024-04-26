@@ -17,6 +17,7 @@ import DialogButton from "react-native-dialog/lib/Button";
 import LastResult from "../../components/LastResult";
 import { useAllTime } from "../../zustand/zustand";
 import AverageTime from "../../components/AverageTime";
+import AverageTen from "../../components/AverageTen";
 function MainScreen() {
   const [DialogVisible, setDialogVisible] = useState(false);
   const { clearAllTime } = useAllTime();
@@ -56,8 +57,9 @@ function MainScreen() {
             </Text>
             <AverageTime />
             <Text style={styles.left_side_text_two}>
-              Середній час складання (10р.)
+              Середній час складання (3р.)
             </Text>
+            <AverageTen />
           </View>
           <View style={styles.right_side}>
             <Text style={styles.right_side_text}>Час останніх складань</Text>
@@ -175,7 +177,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontFamily: "Ukraine",
     color: "white",
-    marginTop: 25,
+    marginTop: 30,
   },
   right_side_text: {
     fontSize: 15,
