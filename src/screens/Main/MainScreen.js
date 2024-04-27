@@ -9,18 +9,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Dialog from "react-native-dialog";
-import * as Font from "expo-font";
+import DialogButton from "react-native-dialog/lib/Button";
 import { useFonts } from "expo-font";
 import { useState } from "react";
-import MainTime from "../../components/MainTime";
-import DialogButton from "react-native-dialog/lib/Button";
-import LastResult from "../../components/LastResult";
 import { useAllTime } from "../../zustand/zustand";
+import MainTime from "../../components/MainTime";
+import LastResult from "../../components/LastResult";
 import AverageTime from "../../components/AverageTime";
 import AverageTen from "../../components/AverageTen";
+
 function MainScreen() {
-  const [DialogVisible, setDialogVisible] = useState(false);
-  const { clearAllTime, allTimes } = useAllTime();
   const [fontsLoaded] = useFonts({
     Bebas: require("../../assets/fonts/Bebas_Neue_Cyrillic.ttf"),
     Ukraine: require("../../assets/fonts/e-Ukraine.otf"),
@@ -29,11 +27,13 @@ function MainScreen() {
     return null;
   }
 
-  const timeCleaner = () => {
+  const [DialogVisible, setDialogVisible] = useState(false);
+  const { clearAllTime, allTimes } = useAllTime();
+
+  const dialog_time_cleaner = () => {
     setDialogVisible(false);
     clearAllTime();
   };
-
   const dialog_open = () => {
     allTimes.length <= 0 ? setDialogVisible(false) : setDialogVisible(true);
   };
@@ -96,7 +96,7 @@ function MainScreen() {
             </Dialog.Title>
             <DialogButton
               label="Так"
-              onPress={() => timeCleaner()}
+              onPress={() => dialog_time_cleaner()}
               style={{
                 backgroundColor: "#242424",
                 borderRadius: 8,

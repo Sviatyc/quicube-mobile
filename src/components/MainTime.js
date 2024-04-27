@@ -9,6 +9,7 @@ function MainTime() {
   const [ready, setReady] = useState(false);
   const [isTiming, setTiming] = useState(false);
   const timeIntervalRef = useRef(null);
+
   const { allTimes, addTimes } = useAllTime();
 
   const startTime = () => {
