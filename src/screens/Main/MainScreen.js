@@ -19,6 +19,9 @@ import AverageTime from "../../components/AverageTime";
 import AverageTen from "../../components/AverageTen";
 
 function MainScreen() {
+  const [DialogVisible, setDialogVisible] = useState(false);
+  const { clearAllTime, allTimes } = useAllTime();
+
   const [fontsLoaded] = useFonts({
     Bebas: require("../../assets/fonts/Bebas_Neue_Cyrillic.ttf"),
     Ukraine: require("../../assets/fonts/e-Ukraine.otf"),
@@ -26,9 +29,6 @@ function MainScreen() {
   if (!fontsLoaded) {
     return null;
   }
-
-  const [DialogVisible, setDialogVisible] = useState(false);
-  const { clearAllTime, allTimes } = useAllTime();
 
   const dialog_time_cleaner = () => {
     setDialogVisible(false);
