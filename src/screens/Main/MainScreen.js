@@ -9,18 +9,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import Dialog from "react-native-dialog";
-import * as Font from "expo-font";
+import DialogButton from "react-native-dialog/lib/Button";
 import { useFonts } from "expo-font";
 import { useState } from "react";
-import MainTime from "../../components/MainTime";
-import DialogButton from "react-native-dialog/lib/Button";
-import LastResult from "../../components/LastResult";
 import { useAllTime } from "../../zustand/zustand";
+import MainTime from "../../components/MainTime";
+import LastResult from "../../components/LastResult";
 import AverageTime from "../../components/AverageTime";
 import AverageTen from "../../components/AverageTen";
+
 function MainScreen() {
-  const [DialogVisible, setDialogVisible] = useState(false);
-  const { clearAllTime } = useAllTime();
   const [fontsLoaded] = useFonts({
     Bebas: require("../../assets/fonts/Bebas_Neue_Cyrillic.ttf"),
     Ukraine: require("../../assets/fonts/e-Ukraine.otf"),
@@ -29,9 +27,15 @@ function MainScreen() {
     return null;
   }
 
-  const timeCleaner = () => {
+  const [DialogVisible, setDialogVisible] = useState(false);
+  const { clearAllTime, allTimes } = useAllTime();
+
+  const dialog_time_cleaner = () => {
     setDialogVisible(false);
     clearAllTime();
+  };
+  const dialog_open = () => {
+    allTimes.length <= 0 ? setDialogVisible(false) : setDialogVisible(true);
   };
 
   return (
@@ -70,7 +74,7 @@ function MainScreen() {
         </View>
         <TouchableOpacity
           style={styles.reset_button}
-          onPress={() => setDialogVisible(true)}
+          onPress={() => dialog_open()}
           activeOpacity={0.8}
         >
           <Text style={styles.reset_button_text}>Скинути результат</Text>
@@ -92,7 +96,7 @@ function MainScreen() {
             </Dialog.Title>
             <DialogButton
               label="Так"
-              onPress={() => timeCleaner()}
+              onPress={() => dialog_time_cleaner()}
               style={{
                 backgroundColor: "#242424",
                 borderRadius: 8,
@@ -128,6 +132,8 @@ const styles = StyleSheet.create({
   },
   logotype: {
     marginTop: 28,
+    width: 70,
+    height: 25,
   },
   mainTime: {
     marginTop: 90,
@@ -188,13 +194,16 @@ const styles = StyleSheet.create({
     backgroundColor: "#B5DCF9",
     borderRadius: 20,
     margin: 0,
+    borderColor: "black",
+    borderStyle: "solid",
+    borderWidth: 0.8,
   },
   dialog_title: {
     fontFamily: "Ukraine",
     fontSize: 18,
     padding: 10,
     borderRadius: 12,
-    backgroundColor: "#B5DCF9",
+    color: "black",
   },
 });
 
